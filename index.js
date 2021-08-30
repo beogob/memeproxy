@@ -5,7 +5,7 @@ const app = express();
 var port = 80; // http port
 
 app.get('/', function (req, res) {
-  res.send("https://github.com/beogob/memeproxy/blob/main/README.md");
+  res.send("octet, java, png");
 })
 
 app.get('/png/*', function (req, res) {
@@ -30,6 +30,21 @@ app.get('/octet/*', function (req, res) {
         request({encoding: "binary", gzip: true, method: "GET", uri: `https:/${site}`}, (_e, _r, body) => {
             res.writeHead(200, {
                 'Content-Type': 'application/octet-stream',
+                'Content-Length': body.length
+            });
+            res.end(body, "binary");
+    
+        })
+    } catch (e) {
+        res.status(500).send("Error");
+    }
+});
+app.get('/java/*', function (req, res) {
+    try {
+        let site = req.url.replace("/java", "");
+        request({encoding: "binary", gzip: true, method: "GET", uri: `https:/${site}`}, (_e, _r, body) => {
+            res.writeHead(200, {
+                'Content-Type': 'application/java-archive',
                 'Content-Length': body.length
             });
             res.end(body, "binary");
