@@ -4,6 +4,10 @@ const request = require("request");
 const app = express();
 var port = 80; // http port
 
+app.get('/', function (req, res) {
+  res.send("https://github.com/beogob/memeproxy/blob/main/README.md");
+})
+
 app.get('/png/*', function (req, res) {
     try {
         let site = req.url.replace("/png", "");
